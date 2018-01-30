@@ -1,4 +1,4 @@
-var btns = ['saturday night live', 'the office', 'all my children', 'law and order', 'mad men', 'scrubs', 'seinfeld', 'friends'];
+var btns = ['saturday night live', 'the office', 'looney toons', 'breaking bad', 'mad men', 'scrubs', 'seinfeld', 'friends'];
 
 function searchGiphy (show) {
 	// var queryURL = "http://api.giphy.com/v1/gifs/search?q="+show+"&api_key=oGxiCi75V8lJIYCKLIoXGgRp6fG5Audl&limit=20"
@@ -8,8 +8,15 @@ function searchGiphy (show) {
 	}).then(function(response) {
 		console.log(response);
 		for (g=0;g<response.data.length;g++) {
+			// I'll need to make a div, so that I can include the rating text.
 			var gif = $('<img>');
-			gif.attr('src', response.data[g].images.fixed_height.url);
+			gif.attr('src', response.data[g].images.fixed_height_still.url);
+			gif.addClass('gif')
+			// I'd like to have an alt that says there was an issue with this gif.
+			gif.attr('alt', '#');
+			gif.attr('state', 'still')
+			gif.data('anim', response.data[g].images.fixed_height.url);
+			gif.data('still', response.data[g].images.fixed_height_still.url);
 			$("#gifBox").append(gif);
 		}
 	})
@@ -36,6 +43,19 @@ $(document).ready(function () {
 		$('#gifBox').empty();
 		searchGiphy(this.value);
 	})
+
+	$(document).on('click', '.gif', function () {
+		if ($(this).attr("state") === "still"){
+			$(this).attr('src', $(this).data("anim"));
+			$(this).attr("state", "anim");
+		}
+		else if ($(this).attr("state") === "anim") {
+			$(this).attr('src', $(this).data("still"));
+			$(this).attr("state", "still");
+		}
+	})
+
+
 	// $(".gifBtn").click(function () {
 	// })
 
