@@ -1,3 +1,19 @@
 body {
 	font-family: 'Montserrat', sans-serif;
 }
+
+.btn {
+	margin: 2px;
+	text-transform: capitalize;
+	/*word-wrap: break-word;*/
+	white-space: normal;
+}
+
+img {
+	margin: 2px;
+}
+
+#head {
+	padding-top: 20px;
+	background-color: #ada;
+}
