@@ -1,23 +1,30 @@
-var btns = ['saturday night live', 'the office', 'looney toons', 'breaking bad', 'mad men', 'scrubs', 'seinfeld', 'friends'];
+var btns = ['saturday night live', 'the office', 'looney toons', 'breaking bad', 'mad men', 'scrubs', 'seinfeld', 'friends', 'dragon ball z', 'jeopardy'];
 
 function searchGiphy (show) {
 	// var queryURL = "http://api.giphy.com/v1/gifs/search?q="+show+"&api_key=oGxiCi75V8lJIYCKLIoXGgRp6fG5Audl&limit=20"
 	$.ajax({
-		url: "http://api.giphy.com/v1/gifs/search?q="+show+"&api_key=oGxiCi75V8lJIYCKLIoXGgRp6fG5Audl&limit=10",
+		url: "https://api.giphy.com/v1/gifs/search?q="+show+"&rating=pg&api_key=oGxiCi75V8lJIYCKLIoXGgRp6fG5Audl&limit=10",
 		method: "GET"
 	}).then(function(response) {
 		console.log(response);
 		for (g=0;g<response.data.length;g++) {
 			// I'll need to make a div, so that I can include the rating text.
-			var gif = $('<img>');
-			gif.attr('src', response.data[g].images.fixed_height_still.url);
+			var gif = $('<div>');
+			var img = $('<img>');
+			var rating = $('<br><span></span>');
 			gif.addClass('gif')
-			// I'd like to have an alt that says there was an issue with this gif.
-			gif.attr('alt', '#');
-			gif.attr('state', 'still')
-			gif.data('anim', response.data[g].images.fixed_height.url);
-			gif.data('still', response.data[g].images.fixed_height_still.url);
+			img.addClass('gifBox');
+			img.attr('src', response.data[g].images.fixed_height_still.url);
+			img.attr('alt', '#');
+			img.attr('state', 'still');
+			img.data('anim', response.data[g].images.fixed_height.url);
+			img.data('still', response.data[g].images.fixed_height_still.url);
+			rating.text('Rating: '+response.data[g].rating);
+			gif.append(img);
+			gif.append(rating);
+			// if (response.data[g].rating === "g" || response.data[g].rating === "pg" ) {
 			$("#gifBox").append(gif);
+			// }
 		}
 	})
 }
@@ -44,7 +51,7 @@ $(document).ready(function () {
 		searchGiphy(this.value);
 	})
 
-	$(document).on('click', '.gif', function () {
+	$(document).on('click', '.gifBox', function () {
 		if ($(this).attr("state") === "still"){
 			$(this).attr('src', $(this).data("anim"));
 			$(this).attr("state", "anim");

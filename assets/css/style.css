@@ -1,12 +1,29 @@
 body {
 	font-family: 'Montserrat', sans-serif;
+	color: #F0F4DC;
+	padding-bottom: 20px;
+	background-image: url('../images/bkg.png')
 }
 
 .btn {
+	color: #50542C;
 	margin: 2px;
 	text-transform: capitalize;
 	/*word-wrap: break-word;*/
 	white-space: normal;
+	background-color: #A7DBD8;
+}
+
+.gif {
+	display: inline-block;
+	background-color: #A7DBD8;
+	margin: 2px;
+	padding: 2px;
+	color: #50542C;
+}
+
+.gifBtn {
+	/*float: right;*/
 }
 
 img {
@@ -14,12 +31,41 @@ img {
 }
 
 #head {
-	padding-top: 20px;
-	background-color: #ada;
+	padding: 20px;
+	background-color: #F38630;
+	padding-left: 25px;
+	margin-bottom: 10px;
 }
 
 @media (min-width: 1200px) {
 .container {
     max-width: 1400px;
 }
+}
+
+@media (min-width: 992px) {
+	form {
+		margin-top: -11px;
+		display: inline;
+		float: right;
+	}
+}
+
+@media (max-width: 992px) {
+	btn
+} 
+
+h1 {
+	text-align: left;
+	display: inline;
+}
+
+input[type="text"] {
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+#add {
+	padding-top: 0;
+	padding-bottom: 0;
 }
